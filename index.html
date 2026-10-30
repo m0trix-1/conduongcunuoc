@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hành Trình Cứu Nước - Chủ tịch Hồ Chí Minh (1911-1941)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts cho phong cách báo cũ cổ điển -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- FontAwesome cho icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sepia: {
+                            50: '#fdfbf7',
+                            100: '#f4ebd0',
+                            200: '#e9dac1',
+                            300: '#d5c29f',
+                            800: '#5a4a35',
+                            900: '#3c2f1f',
+                        },
+                        newspaper: {
+                            bg: '#f3ece1',
+                            paper: '#f9f6ef',
+                            ink: '#231f1e',
+                            accent: '#8b0000',
+                            border: '#d2c2a5',
+                            line: '#b5a386'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Merriweather', 'serif'],
+                        display: ['Playfair Display', 'serif'],
+                        typewriter: ['IBM Plex Mono', 'Courier New', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f3ece1;
+            color: #231f1e;
+            font-family: 'Merriweather', serif;
+            background-image: radial-gradient(circle, #f9f6ef 0%, #e6dac2 100%);
+        }
+        
+        /* Hiệu ứng giấy cũ ố vàng */
+        .aged-paper {
+            background-color: #f9f6ef;
+            background-image: linear-gradient(to bottom, rgba(245, 230, 211, 0.4), rgba(225, 205, 175, 0.6)), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            box-shadow: 0 10px 30px rgba(60, 47, 31, 0.15), inset 0 0 60px rgba(181, 163, 134, 0.15);
+            border: 2px solid #b5a386;
+        }
+
+        .newspaper-header {
+            border-bottom: 4px double #231f1e;
+            border-top: 2px solid #231f1e;
+        }
+
+        .sub-header-line {
+            border-bottom: 1px solid #231f1e;
+            border-top: 1px solid #231f1e;
+        }
+
+        /* Tùy chỉnh thanh cuộn */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e9dac1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b5a386;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a4a35;
+        }
+
+        .timeline-line {
+            background: repeating-linear-gradient(
+                to bottom,
+                #8b0000 0px,
+                #8b0000 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .stamp {
+            border: 3px dashed #8b0000;
+            color: #8b0000;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            transform: rotate(-6deg);
+        }
+
+        .vintage-border {
+            border: 1px solid #b5a386;
+            box-shadow: 3px 3px 0px rgba(181, 163, 134, 0.5);
+        }
+
+        .drop-cap::first-letter {
+            font-size: 3.2rem;
+            line-height: 1;
+            float: left;
+            margin-right: 8px;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: #8b0000;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-6 px-4 md:px-8">
+
+    <!-- Cửa sổ thông báo / Hộp thoại chi tiết tư liệu -->
+    <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden px-4">
+        <div class="aged-paper p-6 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-3xl font-bold text-newspaper-ink hover:text-newspaper-accent transition">&times;</button>
+            <div id="modal-content">
+                <!-- Nội dung chi tiết mốc lịch sử -->
+            </div>
+            <div class="mt-6 text-center border-t border-newspaper-line pt-4">
+                <button onclick="closeModal()" class="px-8 py-2.5 bg-newspaper-ink text-newspaper-paper font-typewriter tracking-widest text-sm uppercase hover:bg-newspaper-accent transition shadow">Đóng Bản Tin</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto">
+        <!-- HEADER BÁO CŨ ĐÔNG DƯƠNG -->
+        <header class="aged-paper p-6 mb-8 text-center rounded-sm relative">
+            <div class="absolute top-3 left-4 hidden md:block font-typewriter text-xs text-newspaper-ink/70">
+                SỐ ĐẶC BIỆT • LƯU TRỮ QUỐC GIA
+            </div>
+            <div class="absolute top-3 right-4 hidden md:block font-typewriter text-xs text-newspaper-ink/70">
+                ĐÔNG DƯƠNG BÁO - NĂM 1941
+            </div>
+
+            <p class="font-typewriter text-xs md:text-sm tracking-widest uppercase mb-1 text-newspaper-accent font-semibold">Tập San Đặc Biệt Về Hành Trình Lịch Sử Dân Tộc</p>
+            <h1 class="font-display text-4xl md:text-6xl font-black uppercase tracking-tight my-2 text-newspaper-ink">
+                ĐƯỜNG CỨU NƯỚC
+            </h1>
+            <p class="font-serif italic text-base md:text-lg text-newspaper-ink/80 max-w-3xl mx-auto mb-4">
+                Ba mươi năm bôn ba hải ngoại, vượt qua bốn đại dương, tìm thấy ngọn đuốc soi đường giải phóng dân tộc của Chủ tịch Hồ Chí Minh (1911 - 1941)
+            </p>
+
+            <div class="newspaper-header py-2 my-3 flex flex-wrap justify-center items-center gap-4 md:gap-8 font-typewriter text-xs md:text-sm font-bold">
+                <span>📍 Xuất phát: Bến Nhà Rồng (05/06/1911)</span>
+                <span>•</span>
+                <span>🇻🇳 Trở về: Pắc Bó, Cao Bằng (28/01/1941)</span>
+                <span>•</span>
+                <span>⭐ Kết quả: Khai sinh con đường cách mạng vô sản</span>
+            </div>
+        </header>
+
+        <!-- THANH ĐIỀU HƯỚNG / BỘ LỌC 4 GIAI ĐOẠN -->
+        <nav class="mb-8 flex flex-wrap justify-center gap-2 md:gap-3">
+            <button onclick="filterStages('all')" id="btn-all" class="px-4 py-2.5 aged-paper font-typewriter text-xs md:text-sm font-bold hover:bg-newspaper-accent hover:text-newspaper-paper transition shadow-sm border-2 border-newspaper-ink bg-newspaper-accent text-newspaper-paper">
+                TOÀN BỘ (1911-1941)
+            </button>
+            <button onclick="filterStages('stage1')" id="btn-stage1" class="px-4 py-2.5 aged-paper font-typewriter text-xs md:text-sm font-bold hover:bg-newspaper-accent hover:text-newspaper-paper transition shadow-sm border border-newspaper-line">
+                GĐ 1: KHỞI HÀNH (1911-1917)
+            </button>
+            <button onclick="filterStages('stage2')" id="btn-stage2" class="px-4 py-2.5 aged-paper font-typewriter text-xs md:text-sm font-bold hover:bg-newspaper-accent hover:text-newspaper-paper transition shadow-sm border border-newspaper-line">
+                GĐ 2: CHÂN LÝ MÁC - LÊNIN (1917-1923)
+            </button>
+            <button onclick="filterStages('stage3')" id="btn-stage3" class="px-4 py-2.5 aged-paper font-typewriter text-xs md:text-sm font-bold hover:bg-newspaper-accent hover:text-newspaper-paper transition shadow-sm border border-newspaper-line">
+                GĐ 3: CHUẨN BỊ TỔ CHỨC (1923-1930)
+            </button>
+            <button onclick="filterStages('stage4')" id="btn-stage4" class="px-4 py-2.5 aged-paper font-typewriter text-xs md:text-sm font-bold hover:bg-newspaper-accent hover:text-newspaper-paper transition shadow-sm border border-newspaper-line">
+                GĐ 4: TRỞ VỀ TỔ QUỐC (1941)
+            </button>
+        </nav>
+
+        <!-- NỘI DUNG CHÍNH: BỐ CỤC BÁO CŨ (SƠ ĐỒ TIMELINE & CỘT TƯ LIỆU) -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Cột trái: Sơ đồ dòng thời gian 4 giai đoạn chi tiết (8 cột) -->
+            <div class="lg:col-span-8 relative">
+                <div class="absolute left-6 md:left-8 top-0 bottom-0 w-1 timeline-line"></div>
+
+                <div id="timeline-container" class="space-y-8 pl-12 md:pl-16">
+                    <!-- Được render tự động qua JavaScript với dữ liệu chuẩn xác -->
+                </div>
+            </div>
+
+            <!-- Cột phải: Góc tư liệu lịch sử, hình ảnh & thống kê (4 cột) -->
+            <div class="lg:col-span-4 space-y-6">
+                <!-- Thẻ Tóm tắt hành trình -->
+                <div class="aged-paper p-5 rounded-sm relative">
+                    <div class="absolute top-3 right-3 stamp px-2 py-1 text-[10px] uppercase font-bold">
+                        HỒ SƠ GỐC
+                    </div>
+                    <h3 class="font-display text-xl font-bold border-b-2 border-newspaper-ink pb-2 mb-3 uppercase tracking-wide">
+                        <i class="fa-solid fa-scroll mr-2"></i> Tổng Quan Hành Trình
+                    </h3>
+                    <ul class="space-y-3 font-serif text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-ship text-newspaper-accent mt-1"></i>
+                            <div><strong>05/06/1911:</strong> Văn Ba rời bến Nhà Rồng trên tàu buôn Pháp Amiral Latouche-Tréville.</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-globe-asia text-newspaper-accent mt-1"></i>
+                            <div><strong>Gần 30 quốc gia:</strong> Đã đi qua các nước Pháp, Anh, Mỹ, Ý, Đức, Trung Quốc, Liên Xô...</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-file-pen text-newspaper-accent mt-1"></i>
+                            <div><strong>18/06/1919:</strong> Gửi Yêu sách nhân dân An Nam tới Hội nghị Versailles.</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-flag text-newspaper-accent mt-1"></i>
+                            <div><strong>03/02/1930:</strong> Chủ trì Hội nghị hợp nhất, thành lập Đảng Cộng sản Việt Nam.</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-mountain text-newspaper-accent mt-1"></i>
+                            <div><strong>28/01/1941:</strong> Trở về Tổ quốc tại mốc 108 Pắc Bó, trực tiếp lãnh đạo cách mạng.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Thẻ Hình ảnh tư liệu lịch sử thực tế -->
+                <div class="aged-paper p-5 rounded-sm">
+                    <h3 class="font-display text-xl font-bold border-b-2 border-newspaper-ink pb-2 mb-3 uppercase tracking-wide">
+                        <i class="fa-solid fa-camera-retro mr-2"></i> Tư Liệu Ảnh Lịch Sử
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="vintage-border p-2 bg-[#fdfbf7]">
+                            <img src="https://placehold.co/600x400/e9dac1/3c2f1f?text=Ben+Nha+Rong+1911" data-wm="nharong" alt="Bến Nhà Rồng" class="w-full h-44 object-cover filter sepia contrast-125 mb-2 rounded-sm">
+                            <p class="font-typewriter text-xs text-center text-newspaper-ink italic">Bến Nhà Rồng (Sài Gòn) - Nơi người thanh niên yêu nước Nguyễn Tất Thành ra đi tìm đường cứu nước năm 1911.</p>
+                        </div>
+                        <div class="vintage-border p-2 bg-[#fdfbf7]">
+                            <img src="https://placehold.co/600x400/e9dac1/3c2f1f?text=Ho+Chi+Minh" data-wm="ho" alt="Chủ tịch Hồ Chí Minh" class="w-full h-44 object-cover filter sepia contrast-125 mb-2 rounded-sm">
+                            <p class="font-typewriter text-xs text-center text-newspaper-ink italic">Chủ tịch Hồ Chí Minh - Lãnh tụ thiên tài của cách mạng Việt Nam, người đã mở ra kỷ nguyên độc lập, tự do.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thẻ Trích dẫn lịch sử sâu sắc -->
+                <div class="aged-paper p-5 rounded-sm bg-gradient-to-br from-[#f9f6ef] to-[#ebdcc2]">
+                    <h3 class="font-display text-lg font-bold border-b border-newspaper-ink pb-2 mb-3 uppercase tracking-wide text-newspaper-accent">
+                        <i class="fa-solid fa-quote-left mr-2"></i> Lời Dạy Kim Cương
+                    </h3>
+                    <blockquote class="font-serif italic text-sm text-newspaper-ink leading-relaxed mb-3 drop-cap">
+                        "Tự do cho đồng bào tôi, độc lập cho Tổ quốc tôi, đó là tất cả những gì tôi muốn, đó là tất cả những gì tôi hiểu."
+                    </blockquote>
+                    <p class="font-typewriter text-xs text-right font-bold">— Chủ tịch Hồ Chí Minh —</p>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER BÁO CŨ -->
+        <footer class="mt-12 py-6 aged-paper text-center font-typewriter text-xs text-newspaper-ink/80 border-t-2 border-newspaper-ink">
+            <p>XUẤT BẢN ĐẶC BIỆT KỶ NIỆM 30 NĂM HÀNH TRÌNH TÌM ĐƯỜNG CỨU NƯỚC (1911 - 1941)</p>
+            <p class="mt-1">Lưu trữ tài liệu lịch sử Đảng Cộng sản Việt Nam • Phiên bản báo chí học thuật số</p>
+            <p class="mt-3 pt-3 border-t border-newspaper-line text-sm font-bold text-newspaper-ink">Tác giả: Hoàng Bảo Trung</p>
+        </footer>
+    </div>
+
+    <!-- SCRIPT DỮ LIỆU & TƯƠNG TÁC -->
+    <script>
+        // Dữ liệu chi tiết hành trình phân chia theo 4 giai đoạn chuẩn xác lịch sử
+        const journeyData = [
+            // GIAI ĐOẠN 1: 1911 - 1917
+            {
+                id: "event-1",
+                stage: "stage1",
+                stageTitle: "Giai đoạn 1: Khởi hành và khảo sát thực tiễn (1911 - 1917)",
+                year: "05/06/1911",
+                title: "Rời Bến Nhà Rồng - Bắt đầu hành trình vĩ đại",
+                location: "Sài Gòn, Việt Nam",
+                summary: "Thanh niên yêu nước Nguyễn Tất Thành với tên Văn Ba đã lên con tàu buôn Amiral Latouche-Tréville xin làm phụ bếp, chính thức rời Tổ quốc ra đi tìm đường cứu nước.",
+                detail: "Trước câu hỏi của người bạn Lê Thành Trung về tiền bạc để đi ra nước ngoài, Nguyễn Tất Thành giơ hai bàn tay nói: 'Chúng ta sẽ làm việc. Chúng ta sẽ làm bất cứ việc gì để sống và để đi'. Quyết tâm đó đã mở đầu cho hành trình bôn ba qua ba châu lục suốt 30 năm. Việc ra đi của Người diễn ra trong bối cảnh các phong trào yêu nước cuối thế kỷ XIX, đầu thế kỷ XX đều lần lượt thất bại trước sự đàn áp của thực dân Pháp.",
+                significance: "Đánh dấu bước ngoặt quyết định mở đầu cho hành trình tìm con đường giải phóng dân tộc đúng đắn, khác biệt hoàn toàn với các sĩ thân phong kiến trước đó.",
+                image: "nharong"
+            },
+            {
+                id: "event-2",
+                stage: "stage1",
+                stageTitle: "Giai đoạn 1: Khởi hành và khảo sát thực tiễn (1911 - 1917)",
+                year: "1911 - 1917",
+                title: "Bôn ba qua các châu lục, khảo sát đời sống nhân dân lao động",
+                location: "Pháp, Anh, Mỹ, châu Phi...",
+                summary: "Tàu cập bến Marseille (Pháp), sau đó Người đi qua nhiều nước châu Phi, châu Mỹ, châu Âu để quan sát đời sống nhân dân lao động và bản chất của chủ nghĩa đế quốc.",
+                detail: "Trong những năm tháng này, Người làm vô số nghề cực nhọc để mưu sinh như phụ bếp, quét tuyết, đốt lò, thợ ảnh... Qua thực tiễn lao động và quan sát, Người nhận ra một chân lý sâu sắc: ở đâu nhân dân lao động cũng bị bóc lột dã man bởi giai cấp tư sản và thực dân; bản chất của chủ nghĩa thực dân ở đâu cũng tàn bạo như nhau.",
+                significance: "Giúp Người có cái nhìn toàn diện về thế giới, phân biệt rõ lực lượng bạn - thù, nhận thức rõ mối quan hệ gắn bó giữa giai cấp vô sản chính quốc với nhân dân các thuộc địa.",
+                image: "marseille"
+            },
+
+            // GIAI ĐOẠN 2: 1917 - 1923
+            {
+                id: "event-3",
+                stage: "stage2",
+                stageTitle: "Giai đoạn 2: Hoạt động tại Pháp và tìm thấy Chủ nghĩa Mác - Lênin (1917 - 1923)",
+                year: "1917 - 1919",
+                title: "Trở lại Paris, tham gia phong trào công nhân và viết báo",
+                location: "Paris, Pháp",
+                summary: "Nguyễn Tất Thành trở lại Paris, tham gia Hội những người Việt Nam yêu nước, viết báo và tích cực hoạt động chính trị trong phong trào cách mạng Pháp.",
+                detail: "Tại đây, Người tiếp thu các tư tưởng tiến bộ, gia nhập Đảng Xã hội Pháp. Người sống và làm việc giữa phong trào công nhân Pháp, tích cực tiếp cận với các luồng tư tưởng dân chủ tư sản và tư tưởng xã hội chủ nghĩa.",
+                significance: "Đặt nền móng vững chắc cho bước chuyển biến lập trường tư tưởng từ chủ nghĩa yêu nước chân chính sang lập trường cách mạng vô sản.",
+                image: "paris"
+            },
+            {
+                id: "event-4",
+                stage: "stage2",
+                stageTitle: "Giai đoạn 2: Hoạt động tại Pháp và tìm thấy Chủ nghĩa Mác - Lênin (1917 - 1923)",
+                year: "18/06/1919",
+                title: "Gửi 'Yêu sách của nhân dân An Nam' tới Hội nghị Versailles",
+                location: "Paris, Pháp",
+                summary: "Thay mặt những người Việt Nam yêu nước tại Pháp, Người ký tên Nguyễn Ái Quốc gửi bản Yêu sách 8 điểm đòi quyền tự do, dân chủ, bình đẳng cho nhân dân Việt Nam.",
+                detail: "Bản yêu sách đòi chính phủ Pháp thừa nhận các quyền tự do, dân chủ, bình đẳng và quyền tự quyết của nhân dân An Nam. Bản yêu sách gây tiếng vang lớn trên chính trường Pháp và quốc tế. Dù giới cầm quyền tư sản Pháp phớt lờ, nhưng sự kiện này đã thức tỉnh mạnh mẽ tinh thần đấu tranh của nhân dân trong nước.",
+                significance: "Đánh dấu bước ngoặt quan trọng: tiếng nói đòi quyền tự do của nhân dân Việt Nam chính thức bước lên võ đài chính trị quốc tế.",
+                image: "versailles"
+            },
+            {
+                id: "event-5",
+                stage: "stage2",
+                stageTitle: "Giai đoạn 2: Hoạt động tại Pháp và tìm thấy Chủ nghĩa Mác - Lênin (1917 - 1923)",
+                year: "Tháng 07/1920",
+                title: "Đọc 'Sơ thảo lần thứ nhất Luận cương về vấn đề dân tộc và thuộc địa' của Lênin",
+                location: "Paris, Pháp",
+                summary: "Nguyễn Ái Quốc đọc bản Luận cương của V.I. Lênin trên báo L'Humanité (Nhân đạo) và tìm thấy con đường cứu nước đúng đắn.",
+                detail: "Người sau này xúc động viết: 'Luận cương của Lênin làm cho tôi rất cảm động, phấn khởi, sáng tỏ biết bao! Tôi vui mừng đến phát khóc lên... Muốn cứu nước và giải phóng dân tộc không có con đường nào khác con đường cách mạng vô sản'. Luận cương đã giải đáp hoàn toàn bế tắc về đường lối cứu nước.",
+                significance: "Thời khắc lịch sử tìm ra ánh sáng chân lý cứu nước: kết hợp chặt chẽ tinh thần yêu nước chân chính với chủ nghĩa Mác - Lênin.",
+                image: "lenin"
+            },
+            {
+                id: "event-6",
+                stage: "stage2",
+                stageTitle: "Giai đoạn 2: Hoạt động tại Pháp và tìm thấy Chủ nghĩa Mác - Lênin (1917 - 1923)",
+                year: "Tháng 12/1920",
+                title: "Bỏ phiếu tán thành Quốc tế III, tham gia sáng lập Đảng Cộng sản Pháp",
+                location: "Đại hội Tua (Tours), Pháp",
+                summary: "Tại Đại hội lần thứ XVIII của Đảng Xã hội Pháp ở Tua, Nguyễn Ái Quốc đã bỏ phiếu tán thành Quốc tế Cộng sản (Quốc tế III) và trở thành một trong những người sáng lập Đảng Cộng sản Pháp.",
+                detail: "Người là đại biểu Việt Nam đầu tiên tham gia phong trào cộng sản quốc tế, khẳng định giai cấp công nhân và nhân dân các nước thuộc địa là một bộ phận khăng khít của cách mạng vô sản thế giới.",
+                significance: "Chính thức bước từ chủ nghĩa yêu nước chân chính lên chủ nghĩa Mác - Lênin, gắn phong trào cách mạng Việt Nam với phong trào cách mạng thế giới.",
+                image: "tours"
+            },
+
+            // GIAI ĐOẠN 3: 1923 - 1930
+            {
+                id: "event-7",
+                stage: "stage3",
+                stageTitle: "Giai đoạn 3: Chuẩn bị tư tưởng, chính trị và tổ chức thành lập Đảng (1923 - 1930)",
+                year: "1921 - 1925",
+                title: "Hoạt động lý luận, sáng lập báo Le Paria và Hội Liên hiệp thuộc địa",
+                location: "Pháp, Liên Xô, Trung Quốc",
+                summary: "Người sáng lập báo 'Người cùng khổ' (Le Paria), viết tác phẩm 'Bản án chế độ thực dân Pháp' và đến Quảng Châu (Trung Quốc) để huấn luyện cán bộ.",
+                detail: "Năm 1923, Người sang Liên Xô học tập và làm việc tại Quốc tế Cộng sản. Năm 1924, Người đến Quảng Châu (Trung Quốc), trực tiếp sáng lập Hội Việt Nam Cách mạng Thanh niên (1925) và xuất bản tác phẩm 'Đường Kách mệnh' (1927) nhằm truyền bá chủ nghĩa Mác - Lênin về nước.",
+                significance: "Chuẩn bị kỹ lưỡng về tư tưởng, chính trị và tổ chức cho sự ra đời của Đảng Cộng sản Việt Nam.",
+                image: "comintern"
+            },
+            {
+                id: "event-8",
+                stage: "stage3",
+                stageTitle: "Giai đoạn 3: Chuẩn bị tư tưởng, chính trị và tổ chức thành lập Đảng (1923 - 1930)",
+                year: "03/02/1930",
+                title: "Chủ trì Hội nghị hợp nhất, thành lập Đảng Cộng sản Việt Nam",
+                location: "Cửu Long, Hương Cảng, Trung Quốc",
+                summary: "Dưới sự chủ trì của lãnh tụ Nguyễn Ái Quốc, các tổ chức cộng sản trong nước được thống nhất thành một đảng duy nhất lấy tên là Đảng Cộng sản Việt Nam.",
+                detail: "Hội nghị thông qua Chính cương vắn tắt, Sách lược vắn tắt do Nguyễn Ái Quốc trực tiếp soạn thảo. Đây là cương lĩnh chính trị đầu tiên đúng đắn và sáng tạo, vạch ra đường lối chiến lược và sách lược của cách mạng giải phóng dân tộc tiến lên chủ nghĩa xã hội.",
+                significance: "Chấm dứt cuộc khủng hoảng về đường lối cứu nước kéo dài suốt cuối thế kỷ XIX, đầu thế kỷ XX, mở ra bước ngoặt lịch sử vĩ đại của cách mạng Việt Nam.",
+                image: "hongkong"
+            },
+
+            // GIAI ĐOẠN 4: 1941
+            {
+                id: "event-9",
+                stage: "stage4",
+                stageTitle: "Giai đoạn 4: Trở về Tổ quốc trực tiếp lãnh đạo cách mạng (1941)",
+                year: "28/01/1941",
+                title: "Trở về Tổ quốc - Lãnh đạo trực tiếp Cách mạng Việt Nam",
+                location: "Mốc 108, Pắc Bó, Cao Bằng",
+                summary: "Sau 30 năm bôn ba hải ngoại, lãnh tụ Nguyễn Ái Quốc đặt chân trở về Tổ quốc qua cột mốc biên giới Việt - Trung tại Pắc Bó (Cao Bằng).",
+                detail: "Người trực tiếp triệu tập Hội nghị Trung ương 8 (5/1941), quyết định thành lập Mặt trận Việt Minh, xác định nhiệm vụ giải phóng dân tộc là nhiệm vụ bức thiết nhất, tích cực xây dựng lực lượng vũ trang và căn cứ địa cách mạng, chuẩn bị đầy đủ mọi điều kiện cho cuộc Tổng khởi nghĩa tháng Tám năm 1945.",
+                significance: "Kết thúc vẹn toàn hành trình 30 năm bôn ba tìm đường cứu nước, trực tiếp lãnh đạo thắng lợi cuộc đấu tranh giành độc lập, khai sinh nước Việt Nam Dân chủ Cộng hòa.",
+                image: "pacbo"
+            }
+        ];
+
+        // ===== ẢNH TƯ LIỆU: tự động tìm qua API của Wikimedia Commons (mỗi mốc 1-4 ảnh) =====
+        const WM_API = 'https://commons.wikimedia.org/w/api.php';
+        const MAX_IMAGES = 4;       // tối đa ảnh cho mỗi mốc
+        const PER_QUERY = 2;        // lấy tối đa 2 ảnh / truy vấn để ảnh đa dạng
+        const bm = q => q + ' filetype:bitmap';
+        const HO_PORTRAIT = bm('Ho Chi Minh portrait');
+        // Ảnh dự phòng cuối cùng: bảo đảm mốc nào cũng có ít nhất 1 ảnh
+        const GENERIC_FALLBACK = [HO_PORTRAIT, bm('Ho Chi Minh 1946'), bm('Vietnam history 1940s')];
+
+        const imageSpecs = {
+            nharong:    { titles: [], queries: [bm('Nha Rong Wharf Ho Chi Minh Museum'), bm('Bến Nhà Rồng'), bm('Dragon House Wharf Saigon'), bm('Saigon port 1900s'), bm('Amiral Latouche-Tréville ship')] },
+            ho:         { titles: ['Ho Chi Minh 1946.jpg'], queries: [HO_PORTRAIT, bm('Hồ Chí Minh 1946')] },
+            marseille:  { titles: [], queries: [bm('Marseille Vieux-Port 1900'), bm('Vieux-Port de Marseille'), bm('Le Havre port 1910'), bm('Carlton Hotel London Haymarket'), bm('New York Harlem 1910s')] },
+            paris:      { titles: [], queries: [bm('Paris 1919 street photograph'), bm('Paris 1910s'), bm('Paris Gobelins 1910s'), bm('French Section of the Workers International SFIO'), bm("L'Humanité 1919")] },
+            versailles: { titles: [], queries: [bm('Paris Peace Conference 1919'), bm('Hall of Mirrors Versailles treaty 1919'), bm('Treaty of Versailles signing'), bm('Palace of Versailles')] },
+            lenin:      { titles: [], queries: [bm('Vladimir Lenin 1920 portrait'), bm('Lenin portrait'), bm("L'Humanité newspaper 1920"), bm('Lenin speech 1920')] },
+            tours:      { titles: [], queries: [bm('Congrès de Tours 1920'), bm('Congress of Tours 1920 SFIO'), bm('Tours France 1920'), bm('French Communist Party founding 1920')] },
+            comintern:  { titles: [], queries: [bm('Le Paria journal'), bm('Communist International congress Moscow'), bm('Guangzhou 1920s'), bm('Whampoa Military Academy'), bm('Comintern 1920s')] },
+            hongkong:   { titles: [], queries: [bm('Nguyễn Ái Quốc 1930'), bm('Kowloon Hong Kong 1930s'), bm('Hong Kong 1930s'), HO_PORTRAIT, bm('Ho Chi Minh 1920s young')] },
+            pacbo:      { titles: [], queries: [bm('Pác Bó Cao Bằng'), bm('Pac Bo cave Ho Chi Minh'), bm('Cao Bang Vietnam landscape'), bm('Vietnam China border Cao Bang'), HO_PORTRAIT, bm('Viet Minh 1941')] }
+        };
+        const imageCache = {};
+
+        async function wmQuery(params) {
+            const url = WM_API + '?' + new URLSearchParams(Object.assign({
+                action: 'query', format: 'json', origin: '*',
+                prop: 'imageinfo', iiprop: 'url|mime|size', iiurlwidth: '800'
+            }, params));
+            const res = await fetch(url);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const json = await res.json();
+            return Object.values((json.query && json.query.pages) || {});
+        }
+
+        function cleanTitle(t) {
+            return t.replace(/^File:/, '').replace(/\.[A-Za-z0-9]+$/, '').replace(/_/g, ' ').slice(0, 90);
+        }
+
+        function collectImages(pages, limit) {
+            return pages.filter(p => {
+                const info = p.imageinfo && p.imageinfo[0];
+                return info && /^image\/(jpeg|png)$/.test(info.mime) && info.width >= 300;
+            }).sort((a, b) => (a.index || 0) - (b.index || 0)).slice(0, limit).map(p => {
+                const info = p.imageinfo[0];
+                return { url: info.thumburl || info.url, page: info.descriptionurl || info.url, title: cleanTitle(p.title) };
+            });
+        }
+
+        // Trả về mảng 1-4 ảnh {url, page, title} cho một mốc
+        function resolveImages(key) {
+            if (!imageCache[key]) {
+                imageCache[key] = (async () => {
+                    const spec = imageSpecs[key] || { titles: [], queries: [] };
+                    const found = [];
+                    const seen = new Set();
+                    const add = list => list.forEach(im => {
+                        if (found.length < MAX_IMAGES && !seen.has(im.url)) { seen.add(im.url); found.push(im); }
+                    });
+                    if (spec.titles.length) {
+                        try { add(collectImages(await wmQuery({ titles: spec.titles.map(t => 'File:' + t).join('|') }), PER_QUERY)); } catch (e) { /* bỏ qua */ }
+                    }
+                    for (const q of spec.queries) {
+                        if (found.length >= MAX_IMAGES) break;
+                        try { add(collectImages(await wmQuery({ generator: 'search', gsrsearch: q, gsrnamespace: '6', gsrlimit: '10' }), PER_QUERY)); } catch (e) { /* bỏ qua */ }
+                    }
+                    if (!found.length) {
+                        for (const q of GENERIC_FALLBACK) {
+                            if (found.length >= PER_QUERY) break;
+                            try { add(collectImages(await wmQuery({ generator: 'search', gsrsearch: q, gsrnamespace: '6', gsrlimit: '10' }), PER_QUERY)); } catch (e) { /* bỏ qua */ }
+                        }
+                    }
+                    if (!found.length) delete imageCache[key]; // cho phép thử lại lần sau (vd. mất mạng)
+                    return found;
+                })();
+            }
+            return imageCache[key];
+        }
+
+        // Ảnh đầu tiên (dùng cho khung "Tư liệu ảnh lịch sử")
+        function resolveImage(key) {
+            return resolveImages(key).then(list => list[0] ? list[0].url : null);
+        }
+
+        // Nạp ảnh cho khung "Tư liệu ảnh lịch sử" và nạp sẵn ảnh cho các mốc lịch sử
+        function loadWikimediaImages() {
+            document.querySelectorAll('img[data-wm]').forEach(img => {
+                resolveImage(img.dataset.wm).then(url => { if (url) img.src = url; });
+            });
+            journeyData.forEach(item => resolveImages(item.image));
+        }
+
+        // Hiển thị thư viện 1-4 ảnh trong cửa sổ chi tiết
+        function renderGallery(images, altText) {
+            const box = document.getElementById('modal-image-box');
+            if (!box) return;
+            box.innerHTML = '';
+            if (!images.length) {
+                const msg = document.createElement('p');
+                msg.className = 'font-typewriter text-xs text-center text-newspaper-ink italic py-6';
+                msg.textContent = 'Chưa tải được ảnh từ Wikimedia Commons. Vui lòng kiểm tra kết nối mạng rồi mở lại bản tin.';
+                box.appendChild(msg);
+                return;
+            }
+            const many = images.length > 1;
+            const grid = document.createElement('div');
+            grid.className = many ? 'grid grid-cols-2 gap-2' : 'grid grid-cols-1 gap-2';
+            images.forEach((im, i) => {
+                const fig = document.createElement('figure');
+                if (images.length === 3 && i === 2) fig.className = 'col-span-2';
+                const a = document.createElement('a');
+                a.href = im.page; a.target = '_blank'; a.rel = 'noopener';
+                const img = document.createElement('img');
+                img.src = im.url; img.alt = altText; img.loading = 'lazy';
+                img.className = 'w-full ' + (many ? 'h-36' : 'h-56') + ' object-cover filter sepia contrast-125 rounded-sm bg-[#f2e8d5]';
+                img.onerror = () => fig.remove();
+                a.appendChild(img);
+                const cap = document.createElement('figcaption');
+                cap.className = 'font-typewriter text-[10px] leading-snug text-center text-newspaper-ink/70 mt-1';
+                cap.textContent = im.title;
+                fig.appendChild(a); fig.appendChild(cap);
+                grid.appendChild(fig);
+            });
+            box.appendChild(grid);
+            const note = document.createElement('p');
+            note.className = 'font-typewriter text-xs text-center text-newspaper-ink italic mt-2';
+            note.textContent = 'Hình ảnh tư liệu lịch sử liên quan đến sự kiện. (Nguồn: Wikimedia Commons)';
+            box.appendChild(note);
+        }
+
+        // Render danh sách mốc lịch sử theo bộ lọc
+        function renderTimeline(filter = 'all') {
+            const container = document.getElementById('timeline-container');
+            container.innerHTML = '';
+
+            const filteredData = filter === 'all' 
+                ? journeyData 
+                : journeyData.filter(item => item.stage === filter);
+
+            let currentStageTitle = '';
+
+            filteredData.forEach((item, index) => {
+                // Hiển thị tiêu đề giai đoạn nếu đổi nhóm trong chế độ "all"
+                if (filter === 'all' && item.stageTitle !== currentStageTitle) {
+                    currentStageTitle = item.stageTitle;
+                    const stageHeader = document.createElement('div');
+                    stageHeader.className = "my-6 p-3 aged-paper border-l-4 border-newspaper-accent font-display text-lg font-bold text-newspaper-ink shadow-sm";
+                    stageHeader.innerHTML = `<i class="fa-solid fa-bookmark mr-2 text-newspaper-accent"></i> ${currentStageTitle}`;
+                    container.appendChild(stageHeader);
+                }
+
+                const card = document.createElement('div');
+                card.className = `relative aged-paper p-5 md:p-6 rounded-sm transition-all duration-300 hover:shadow-xl hover:translate-x-1 cursor-pointer border-l-4 ${
+                    item.stage === 'stage1' ? 'border-l-amber-700' : 
+                    item.stage === 'stage2' ? 'border-l-red-800' : 
+                    item.stage === 'stage3' ? 'border-l-blue-800' : 'border-l-emerald-800'
+                }`;
+                card.onclick = () => openModal(item);
+
+                card.innerHTML = `
+                    <div class="absolute -left-[35px] md:-left-[43px] top-6 w-6 h-6 rounded-full bg-newspaper-ink border-2 border-newspaper-paper flex items-center justify-center shadow">
+                        <span class="w-2 h-2 rounded-full bg-newspaper-paper"></span>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span class="font-typewriter text-xs md:text-sm font-bold bg-newspaper-ink text-newspaper-paper px-2 py-0.5 rounded-sm">
+                            ${item.year}
+                        </span>
+                        <span class="font-typewriter text-xs text-newspaper-accent font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-location-dot mr-1"></i> ${item.location}
+                        </span>
+                    </div>
+                    <h3 class="font-display text-lg md:text-xl font-bold text-newspaper-ink mb-2">
+                        ${item.title}
+                    </h3>
+                    <p class="font-serif text-sm md:text-base text-newspaper-ink/90 leading-relaxed mb-3">
+                        ${item.summary}
+                    </p>
+                    <div class="flex items-center justify-between pt-2 border-t border-newspaper-line/40 text-xs font-typewriter text-newspaper-accent">
+                        <span>Nhấn để xem chi tiết bản tin tư liệu lịch sử...</span>
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Lọc các giai đoạn
+        function filterStages(stage) {
+            ['all', 'stage1', 'stage2', 'stage3', 'stage4'].forEach(s => {
+                const btn = document.getElementById(`btn-${s}`);
+                if (s === stage) {
+                    btn.classList.add('bg-newspaper-accent', 'text-newspaper-paper');
+                    btn.classList.remove('aged-paper');
+                } else {
+                    btn.classList.remove('bg-newspaper-accent', 'text-newspaper-paper');
+                    btn.classList.add('aged-paper');
+                }
+            });
+
+            renderTimeline(stage);
+        }
+
+        // Mở modal chi tiết mốc lịch sử
+        let modalToken = 0;
+        function openModal(item) {
+            const modal = document.getElementById('modal-container');
+            const content = document.getElementById('modal-content');
+
+            content.innerHTML = `
+                <div class="border-b-2 border-newspaper-ink pb-3 mb-4">
+                    <span class="font-typewriter text-xs bg-newspaper-accent text-newspaper-paper px-2 py-0.5 uppercase">Tư liệu gốc lịch sử • ${item.year}</span>
+                    <h2 class="font-display text-2xl md:text-3xl font-black text-newspaper-ink mt-2">${item.title}</h2>
+                    <p class="font-typewriter text-xs text-newspaper-accent mt-1"><i class="fa-solid fa-map-pin mr-1"></i> Địa điểm: ${item.location}</p>
+                </div>
+                <div class="space-y-4 font-serif text-sm md:text-base text-newspaper-ink/90 leading-relaxed">
+                    <div id="modal-image-box" class="my-3 vintage-border p-2 bg-[#fdfbf7]">
+                        <div class="w-full h-56 bg-[#f2e8d5] rounded-sm flex items-center justify-center font-typewriter text-xs text-newspaper-ink/60">Đang tải ảnh tư liệu...</div>
+                        <p class="font-typewriter text-xs text-center text-newspaper-ink italic mt-2">Hình ảnh tư liệu lịch sử liên quan đến sự kiện.</p>
+                    </div>
+                    <p><strong>Tóm tắt sự kiện:</strong> ${item.summary}</p>
+                    <p class="drop-cap"><strong>Diễn biến chi tiết:</strong> ${item.detail}</p>
+                    <div class="p-4 bg-[#f2e8d5] border-l-4 border-newspaper-accent italic text-xs md:text-sm mt-3">
+                        <strong>Ý nghĩa lịch sử quyết định:</strong> ${item.significance}
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+
+            // Nạp 1-4 ảnh tư liệu từ Wikimedia Commons
+            const token = ++modalToken;
+            resolveImages(item.image).then(images => {
+                if (token !== modalToken) return;
+                renderGallery(images, item.title);
+            });
+        }
+
+        // Đóng modal
+        function closeModal() {
+            const modal = document.getElementById('modal-container');
+            modal.classList.add('hidden');
+        }
+
+        // Đóng modal khi click ra ngoài khung
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal-container');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Khởi chạy khi tải trang
+        window.onload = function() {
+            renderTimeline('all');
+            loadWikimediaImages();
+        }
+    </script>
+</body>
+</html>
